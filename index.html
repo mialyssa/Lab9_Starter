@@ -102,6 +102,72 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    errorBtns.forEach(btn => {
+      btn.addEventListener('click', e => {
+        let btnText = e.target.textContent;
+        switch (btnText) {
+          case 'Console Log':
+            console.log('console log message');
+            break;
+          case 'Console Error':
+            console.error('error message');
+            break;
+          case 'Console Count':
+            console.count('count message');
+            break;
+          case 'Console Warn':
+            console.warn('warning message');
+            break;
+          case 'Console Assert':
+            console.assert(false, 'assert message');
+            break;
+          case 'Console Clear':
+            console.clear();
+            break;
+          case 'Console Dir':
+            console.dir(btn);
+            break;
+          case 'Console dirxml':
+            console.dirxml(btn);
+            break;
+          case 'Console Group Start':
+            console.group('grouped message');
+            break;
+          case 'Console Group End':
+            console.groupEnd();
+            break;
+          case 'Console Table':
+            console.table([
+              { Department: 'CSE', ID: '110' }, 
+              { Department: 'ECE', ID: '111' }
+            ]);
+            break;
+          case 'Start Timer':
+            console.time('timer');
+            break;
+          case 'End Timer':
+            console.timeEnd('timer');
+            break;
+          case 'Console Trace':
+            function level1() {
+              function level2() {
+                console.trace();
+              }
+              level2();
+            }
+            level1();
+            break;
+          case 'Trigger a Global Error':
+            boom();
+            break;
+        }
+      });
+    });
+
+
+
+
   </script>
 </body>
 
