@@ -95,7 +95,7 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);   
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -103,6 +103,7 @@
     // Start your code here
     // You may move this JS to another file if you wish
 
+    //Step 2 - Adding Buttons for Console Testing
     errorBtns.forEach(btn => {
       btn.addEventListener('click', e => {
         let btnText = e.target.textContent;
@@ -165,6 +166,24 @@
       });
     });
 
+    //Step 3 Trying Try/Catch
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let output = document.querySelector('output');
+      let firstNum = document.querySelector('#first-num').value;
+      let secondNum = document.querySelector('#second-num').value;
+      let operator = document.querySelector('#operator').value;
+      try {
+        if (firstNum === '' || secondNum === '') throw new Error('1 or more fields empty');
+        if (isNaN(firstNum) || isNaN(secondNum)) throw new Error('1 or more fields are not numbers');
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        output.innerHTML = error.message;
+        console.error(error.message);
+      }
+    });
+
+    
 
 
 
