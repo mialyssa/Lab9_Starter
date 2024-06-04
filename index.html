@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "aac4f4d2f44d4fceb4bb01bda6aea04a"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script> 
+
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -160,7 +168,7 @@
             level1();
             break;
           case 'Trigger a Global Error':
-            boom();
+            triggerGlobalError();
             break;
         }
       });
@@ -183,7 +191,34 @@
       }
     });
 
-    
+    //Step 4 Throw and Custom Errors
+    class CustomError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'CustomError';
+      }
+    }
+    try {
+      throw new CustomError('custom error');
+    } catch (error) {
+      console.error(error.name + ': ' + error.message);
+    }
+
+    //Step 5 Global Error and tracking
+    function triggerGlobalError() {
+      class TrackError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = "TrackError";
+        }
+      }
+      try {
+        throw new TrackError("TrackError has been thrown");
+        TrackJS.track('Testing TrackJS!');
+      } catch (error) {
+        console.error('Global error triggered:', error);
+      }
+    }
 
 
 
